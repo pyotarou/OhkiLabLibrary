@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/books', function () {
-    return view('book');
-});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+/**
+ * BookController Route
+ */
+
+Route::get('/books', 'BookController@index');
+Route::get('/books/add', 'BookController@add');
+Route::post('/books/add', 'BookController@create');
+//Route::get('/books/edit', 'BookController@edit');
+Route::post('/books/edit', 'BookController@update');
+//Route::get('/books/del', 'BookController@delete');
+Route::post('/books/del', 'BookController@remove');
+Route::get('/books/show', 'BookController@show');
+
+Route::get('ajax/book', 'Ajax\BookController@index');
